@@ -98,7 +98,7 @@ void BitcoinExchange::processInput(const std::string& filename) const {
     }
 
     std::string line;
-    std::getline(file, line); // skip header
+    std::getline(file, line);
     while (std::getline(file, line)) {
         std::istringstream ss(line);
         std::string date, valueStr;

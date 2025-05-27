@@ -16,7 +16,7 @@ int main(int argc, char** argv) {
     for (int i = 1; i < argc; ++i) {
         char* end;
         long value = std::strtol(argv[i], &end, 10);
-        if (*end != '\0' || value <= 0 || value > INT_MAX) {
+        if (*end != '\0' || value <= 0 || value > 2147483647) {
             std::cerr << "Error: Invalid input '" << argv[i] << "'" << std::endl;
             return 1;
         }

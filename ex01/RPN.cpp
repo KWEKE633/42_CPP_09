@@ -1,5 +1,9 @@
 #include "RPN.hpp"
 
+RPN::RPN() {}
+
+RPN::~RPN() {}
+
 int RPN::evaluate(const std::string& expr) {
     std::stack<int> stack;
     std::istringstream iss(expr);
@@ -15,13 +19,29 @@ int RPN::evaluate(const std::string& expr) {
             int a = stack.top(); stack.pop();
             int res;
 
-            if (token == "+") res = a + b;
-            else if (token == "-") res = a - b;
-            else if (token == "*") res = a * b;
+            if (token == "+") {
+                res = a + b;
+                if (res < a)
+                    throw std::runtime_error("Overflow_plus");
+            }
+            else if (token == "-") {
+                res = a - b;
+                if (res > a)
+                    throw std::runtime_error("Overflow_minus");
+            }
+            else if (token == "*") {
+                res = a * b;
+                int tmp = res;
+                if (b != 0 && ((tmp / b) != a))
+                    throw std::runtime_error("Overflow_Multiplied");
+            }
             else {
                 if (b == 0)
                     throw std::runtime_error("Division by zero");
                 res = a / b;
+                int tmp = res;
+                if (tmp * b != a)
+                    throw std::runtime_error("Overflow_Division");
             }
             stack.push(res);
         } else {
