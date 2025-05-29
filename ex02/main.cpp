@@ -4,6 +4,7 @@
 #include <list>
 #include <cstdlib>
 #include <ctime>
+#include <sstream>
 
 int main(int argc, char** argv) {
     if (argc < 2) {
@@ -14,14 +15,14 @@ int main(int argc, char** argv) {
     std::vector<int> vec;
     std::list<int> lst;
     for (int i = 1; i < argc; ++i) {
-        char* end;
-        long value = std::strtol(argv[i], &end, 10);
-        if (*end != '\0' || value <= 0 || value > 2147483647) {
+        std::stringstream ss(argv[i]);
+        long value;
+        if (!(ss >> value) || !(ss.eof()) || value <= 0 || value >= 2147483647) {
             std::cerr << "Error: Invalid input '" << argv[i] << "'" << std::endl;
             return 1;
         }
-        vec.push_back(static_cast<int>(value));
-        lst.push_back(static_cast<int>(value));
+        vec.push_back(value);
+        lst.push_back(value);
     }
 
     PmergeMe sorter;

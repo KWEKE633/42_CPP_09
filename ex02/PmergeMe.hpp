@@ -16,8 +16,8 @@ public:
     void sortList(std::list<int>& sequence);
 
 private:
-    void fordJohnsonSort(std::vector<int>& sequence);
-    void fordJohnsonSort(std::list<int>& sequence);
+    // void fordJohnsonSort(std::vector<int>& sequence);
+    // void fordJohnsonSort(std::list<int>& sequence);
 
     std::vector<size_t> generateJacobsthalIndices(size_t size);
 };
